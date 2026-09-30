@@ -5,9 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  // GitHub Pages deploys under /mor-pdf/ path
-  basePath: process.env.GITHUB_PAGES === 'true' ? '/mor-pdf' : '',
-  assetPrefix: process.env.GITHUB_PAGES === 'true' ? '/mor-pdf/' : '',
+  // Custom domain (theworldnews.app) serves from root, no basePath needed
 };
 
 export default nextConfig;
