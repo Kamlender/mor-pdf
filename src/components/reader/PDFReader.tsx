@@ -10,10 +10,11 @@ interface Props {
   contentId: string;
   title: string;
   isBook: boolean;
+  pdfPath: string;
   onClose: () => void;
 }
 
-export default function PDFReader({ contentId, title, isBook, onClose }: Props) {
+export default function PDFReader({ contentId, title, isBook, pdfPath, onClose }: Props) {
   const [numPages, setNumPages] = useState<number>(0);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [scale, setScale] = useState<number>(1.0);
@@ -28,8 +29,8 @@ export default function PDFReader({ contentId, title, isBook, onClose }: Props) 
   const [visiblePage, setVisiblePage] = useState<number>(1);
   const [pendingPage, setPendingPage] = useState<number | null>(null);
 
-  // Get PDF URL from API
-  const pdfUrl = `/api/v1/contents/${contentId}/pdf`;
+  // Use direct static file path instead of API route
+  const pdfUrl = pdfPath;
 
   // Restore page from session
   useEffect(() => {

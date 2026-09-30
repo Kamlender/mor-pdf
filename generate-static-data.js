@@ -26,6 +26,7 @@ const categories = db.prepare(`SELECT * FROM categories WHERE is_active = 1`).al
 const exams = db.prepare(`SELECT * FROM exams WHERE is_active = 1`).all();
 const allContents = db.prepare(`SELECT * FROM contents WHERE status = 'PUBLISHED' ORDER BY published_at DESC`).all();
 const seoData = db.prepare(`SELECT * FROM seo_metadata`).all();
+const allFiles = db.prepare(`SELECT id, storage_key FROM files`).all();
 
 // Enrich contents with category/exam names
 const catMap = {};
@@ -34,6 +35,8 @@ const examMap = {};
 exams.forEach(e => { examMap[e.id] = e; });
 const seoMap = {};
 seoData.forEach(s => { seoMap[s.content_id] = s; });
+const fileMap = {};
+allFiles.forEach(f => { fileMap[f.id] = f; });
 
 const enrichedContents = allContents.map(c => ({
   id: c.id,
@@ -51,6 +54,7 @@ const enrichedContents = allContents.map(c => ({
   coverFileId: c.cover_file_id,
   thumbnailFileId: c.thumbnail_file_id,
   pdfFileId: c.pdf_file_id,
+  pdfPath: fileMap[c.pdf_file_id]?.storage_key ? '/' + fileMap[c.pdf_file_id].storage_key : null,
   status: c.status,
   pageCount: c.page_count,
   fileSizeBytes: c.file_size_bytes,

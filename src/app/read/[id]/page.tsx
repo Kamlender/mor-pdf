@@ -41,7 +41,8 @@ export default async function ReadPdfPage({ params }: Props) {
     <PDFReaderWrapper 
       contentId={content.id} 
       title={content.title} 
-      isBook={content.contentType === 'BOOK'} 
+      isBook={content.contentType === 'BOOK'}
+      pdfPath={content.pdfPath || `/uploads/${content.pdfFileId}.pdf`}
     />
   );
 }

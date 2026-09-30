@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 
 const PDFReader = dynamic(() => import('@/components/reader/PDFReader'), { ssr: false });
 
-export default function PDFReaderWrapper(props: any) {
+export default function PDFReaderWrapper(props: { contentId: string; title: string; isBook: boolean; pdfPath: string }) {
   const router = useRouter();
   
   return (
