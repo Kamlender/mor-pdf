@@ -1,5 +1,5 @@
 /**
- * मोर PDF — Database Schema (Drizzle ORM)
+ * PdfXpress | Database Schema (Drizzle ORM)
  * 
  * Follows TRD's PostgreSQL schema design exactly.
  * Uses SQLite for V1 development (swappable to PostgreSQL via Drizzle).
