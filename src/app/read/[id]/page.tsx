@@ -1,9 +1,18 @@
 import { notFound } from 'next/navigation';
-import { getContentById } from '@/lib/data';
+import { getContentById, getPublishedContents } from '@/lib/data';
 import PDFReaderWrapper from './PDFReaderWrapper';
 import { Metadata } from 'next';
 
 type Props = { params: Promise<{ id: string }> };
+
+export async function generateStaticParams() {
+  try {
+    const allContents = await getPublishedContents({ limit: 9999 });
+    return allContents.map((c: any) => ({ id: c.id }));
+  } catch {
+    return [];
+  }
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;

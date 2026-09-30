@@ -40,8 +40,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# database
-/data/*.db
+# database (keep pdfxpress.db for build, ignore others)
 /pdfxpress.db
 *.db-journal
 *.db-wal

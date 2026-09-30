@@ -5,9 +5,18 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import PDFReaderLauncher from '@/components/reader/PDFReaderLauncher';
 import ExamLogo from '@/components/ui/ExamLogo';
-import { getContentBySlug, SUBJECTS } from '@/lib/data';
+import { getContentBySlug, getPublishedContents, SUBJECTS } from '@/lib/data';
 
 type Props = { params: Promise<{ slug: string }> };
+
+export async function generateStaticParams() {
+  try {
+    const allContents = await getPublishedContents({ limit: 9999 });
+    return allContents.map((c: any) => ({ slug: c.slug }));
+  } catch {
+    return [];
+  }
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
